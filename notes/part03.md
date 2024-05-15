@@ -66,7 +66,40 @@ form.username(class="form-control form-control-lg") }}
 </div>
 ```
 
-- left off @ https://youtu.be/UIJKdCIEXUQ?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=1
+- specify what methods are allowed for each route
+
+```
+@app.route("/register", methods=['GET', 'POST'])
+```
+
+- flash alert when form submitted. bootstrap class 'success'
+
+```
+from flask import flash
+
+if form.validate_on_submit():
+flash(f'Account created for {form.username.data}!', 'success')
+```
+
+```
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in mesages %}
+<div class="alert alert-{{ category }}"></div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+```
+
+- redirect on submit
+
+```
+from flask import redirect
+return redirect(url_for('home'))
+```
+
+- left off @ https://youtu.be/UIJKdCIEXUQ?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=1927
 
 ```
 
