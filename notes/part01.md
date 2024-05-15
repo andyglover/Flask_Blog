@@ -1,5 +1,3 @@
-# helpful info:
-
 part 1: https://youtu.be/MwZwr5Tvyxo?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
 
 - pip install flask
@@ -37,10 +35,4 @@ def about():
 @app.route("/home")
 def home():
     return "<h1>Home Page</h1>"
-```
-
-- left off @ https://youtu.be/MwZwr5Tvyxo?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=848
-
-```
-
 ```
