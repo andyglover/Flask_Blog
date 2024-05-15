@@ -87,6 +87,7 @@ put content here
 ```
 
 - You don't have to put the "content" after "endblock" - its optional for clarity.
+- Also, you can call it whatever you want. doesn't have to be "content"
 
 - Bootstrap: there is a flask extension that you can use, but you can also just use it directly. Only need to make change to the one template that every page inherits from.
 - From the starter template: https://getbootstrap.com/docs/4.3/getting-started/introduction/
