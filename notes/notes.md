@@ -22,4 +22,25 @@ if __name__ == '__main__':
 python flaskblog.py
 ```
 
+- To add another route, change the argument and also the function name:
+
+```
+@app.route("/about")
+def about():
+    return "<h1>About Page</h1>"
+```
+
+- Multiple routes for one page:
+
+```
+@app.route("/")
+@app.route("/home")
+def home():
+    return "<h1>Home Page</h1>"
+```
+
 - left off @ https://youtu.be/MwZwr5Tvyxo?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=848
+
+```
+
+```
