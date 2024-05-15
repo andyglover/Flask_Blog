@@ -88,4 +88,10 @@ put content here
 
 - You don't have to put the "content" after "endblock" - its optional for clarity.
 
-- left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=860
+- Bootstrap: there is a flask extension that you can use, but you can also just use it directly. Only need to make change to the one template that every page inherits from.
+- From the starter template: https://getbootstrap.com/docs/4.3/getting-started/introduction/
+- Grab the meta tags and head css, as well as the javascript.
+- Put layout page content in a div with class container (bootstrap class)
+- Hard refresh = Ctrl + Shift + R = will also clear the cache
+
+- left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=1201
