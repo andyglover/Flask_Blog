@@ -105,4 +105,6 @@ from flask import url_for
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 ```
 
+https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Flask_Blog/snippets
+
 - left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=1201
