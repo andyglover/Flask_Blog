@@ -94,5 +94,15 @@ put content here
 - Grab the meta tags and head css, as well as the javascript.
 - Put layout page content in a div with class container (bootstrap class)
 - Hard refresh = Ctrl + Shift + R = will also clear the cache
+- Create /static folder and main.css file.
+- refer to it with a "Url for"
+
+```
+from flask import url_for
+```
+
+```
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+```
 
 - left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=1201
