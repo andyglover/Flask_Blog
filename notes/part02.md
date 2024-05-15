@@ -49,4 +49,24 @@ posts = [
   </body>
 ```
 
+- use if statements to set title, if it is specified in the route
+
+```
+@app.route("/about")
+def about():
+    return render_template('about.html', title='About')
+```
+
+```
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if title %}
+    <title>Flask Blog - {{ title }}</title>
+    {% else %}
+    <title>Flask Blog</title>
+    {% endif %}
+  </head>
+```
+
 - left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=346
