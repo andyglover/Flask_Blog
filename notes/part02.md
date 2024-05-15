@@ -69,4 +69,23 @@ def about():
   </head>
 ```
 
-- left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=346
+- Template inheritance - in templates folder, create layout.html. In the part that you want each page to be able to change (the body of the html), put a content block:
+
+```
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+```
+
+- In pages that enherit,
+
+```
+{% extends "layout.html" %}
+{% block content %}
+put content here
+{% endblock content %}
+```
+
+- You don't have to put the "content" after "endblock" - its optional for clarity.
+
+- left off @ https://youtu.be/QnDWIZuWYW0?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&t=860
