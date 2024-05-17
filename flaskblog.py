@@ -28,9 +28,11 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
-    # The tutorial suggests using "datetime.utcnow", which is deprecated according to linter.
-    # "datetime.now(timezone.utc)" is preferred for creating timezone-aware datetimes.
-    # "lambda: " is used to defer execution of timezone-aware datetime to entry creation
+ 
+    # The tutorial suggests using datetime.utcnow() which is now deprecated.
+    # datetime.now(timezone.utc) returns a "timezone-aware" datetime object. 
+    # You can't remove the perens from this like you can with datetime.utcnow().
+    # so including "lambda:" ensures deferred execution, generating the time at column insertion.
 
 posts = [
     {
