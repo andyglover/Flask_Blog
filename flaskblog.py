@@ -7,7 +7,7 @@ import pytz
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '46e8e5a05609c89707c1299f8aaace4f'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['TIMEZONE'] = 'UTC'
+app.config['TIMEZONE'] = 'America/Los_Angeles'
 db = SQLAlchemy(app)
 
 # Helper Functions for Timezone Conversion
