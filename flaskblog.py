@@ -1,5 +1,4 @@
-# from datetime import datetime
-from sqlalchemy.sql import func
+from datetime import datetime, timezone
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
@@ -23,7 +22,7 @@ class User(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=func.current_timestamp)
+    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
@@ -31,13 +30,7 @@ class Post(db.Model):
         return f"Post('{self.title}', '{self.date_posted}')"
     # The tutorial suggests using "datetime.utcnow", which is deprecated according to linter.
     # "datetime.now(timezone.utc)" is preferred for creating timezone-aware datetimes.
-    # Time must be generated at entry creation without using parentheses (deferred execution). 
-    # I don't want to make a helper function, so an alternative method is needed.
-    # Using func.current_timestamp() with timezone=True creates a timezone-aware datetime column.
-    # Requires another import: "from sqlalchemy.sql import func"
-    # Note: This relies on the database server's timezone configuration. For SQLite, this uses the system's timezone.
-    # Timestamp conversion to UTC later might be necessary. 
-    # I may have spent too much time researching this, I'm not sure what the rest of the tutorial entails.
+    # "lambda: " is used to defer execution of timezone-aware datetime to entry creation
 
 posts = [
     {
