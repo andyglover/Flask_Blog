@@ -2,11 +2,24 @@ from datetime import datetime, timezone
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
+import pytz
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '46e8e5a05609c89707c1299f8aaace4f'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['TIMEZONE'] = 'UTC'
 db = SQLAlchemy(app)
+
+# Helper Functions for Timezone Conversion
+def utc_to_local(utc_dt):
+    local_tz = pytz.timezone(app.config['TIMEZONE'])
+    local_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
+    return local_tz.normalize(local_dt)  # .normalize might be unnecessary for some cases
+
+def local_to_utc(local_dt):
+    local_tz = pytz.timezone(app.config['TIMEZONE'])
+    utc_dt = local_tz.localize(local_dt).astimezone(pytz.utc)
+    return utc_dt
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,17 +35,22 @@ class User(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
+    date_posted = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}')"
+        return f"Post('{self.title}', '{utc_to_local(self.date_posted)}')"
  
-    # The tutorial suggests using datetime.utcnow() which is now deprecated.
+    # The tutorial suggests using datetime.utcnow() at date_posted column insertion, which is now deprecated.
     # datetime.now(timezone.utc) returns a "timezone-aware" datetime object. 
-    # You can't remove the perens from this like you can with datetime.utcnow().
+    # You can't remove the perens from this because you need to pass a timezone argument.
     # so including "lambda:" ensures deferred execution, generating the time at column insertion.
+    #
+    # sqlite doesn't natively support timezone aware, so pytz and helper functions are utilized.
+    # Store the datetime as naive UTC in the database and convert on retrieval and setting
+    # (Removed timezone=True from db.Column(db.DateTime(timezone=True)...)
+
 
 posts = [
     {
